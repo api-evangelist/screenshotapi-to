@@ -1,0 +1,97 @@
+name: ScreenshotAPI
+description: >-
+  ScreenshotAPI (screenshotapi.to) is a hosted screenshot and PDF capture API — send a URL or raw
+  HTML, get back a PNG, JPEG, WebP or PDF without running browser infrastructure. The contract is
+  deliberately small: one screenshot resource answering both GET and POST, plus a health check.
+  What sets it apart from its size is the agent-readable surface around it — an llms.txt on the
+  root, a 302KB llms-full.txt, a separate docs llms.txt, an agent install guide, a dedicated
+  AI-agents page, and per-page markdown by appending .md to any /docs/ URL. An MCP server exists
+  but runs locally over stdio and is not yet published to npm, so it is described here rather than
+  advertised as a hosted endpoint. Not to be confused with ScreenshotAPI.net, a different company
+  in the same category — see the screenshotapi-net entry.
+url: https://screenshotapi-to.apievangelist.com/apis.yml
+created: '2026-08-02'
+modified: '2026-08-02'
+specificationVersion: '0.21'
+tags:
+  - Screenshots
+  - Website Screenshots
+  - URL to Image
+  - URL to PDF
+  - HTML to Image
+  - Developer Tools
+  - Web Automation
+  - Visual Testing
+  - Agent-readable
+apis:
+  - name: ScreenshotAPI
+    description: >-
+      Capture a public or authorized web page, or raw HTML, as PNG, JPEG, WebP or PDF. Three
+      operations across two paths — GET and POST on the screenshot resource, plus a health check.
+      OpenAPI 3.1.0 with two component schemas (ScreenshotRequest, ErrorResponse). Authenticates
+      with an API key in the x-api-key header or a bearer token.
+    humanURL: https://screenshotapi.to/docs
+    baseURL: https://screenshotapi.to
+    tags:
+      - Screenshots
+      - URL to Image
+      - URL to PDF
+      - HTML to Image
+      - Developer Tools
+    properties:
+      - type: OpenAPI
+        url: openapi/screenshotapi-to-openapi.json
+      - type: OpenAPI
+        url: https://screenshotapi.to/openapi.json
+      - type: Documentation
+        url: https://screenshotapi.to/docs
+      - type: Pricing
+        url: https://screenshotapi.to/pricing
+properties:
+  - type: Documentation
+    url: https://screenshotapi.to/docs
+  - type: LLMSTxt
+    url: llms/screenshotapi-to-llms.txt
+  - type: LLMSTxt
+    url: https://screenshotapi.to/llms.txt
+  - type: LLMSTxt
+    url: https://screenshotapi.to/llms-full.txt
+  - type: LLMSTxt
+    url: https://screenshotapi.to/docs/llms.txt
+  - type: AgentGuide
+    url: https://screenshotapi.to/ai-agents
+  - type: AgentInstall
+    url: https://screenshotapi.to/llms-install.md
+  - type: Pricing
+    url: https://screenshotapi.to/pricing
+maintainers:
+  - FN: ScreenshotAPI
+    url: https://screenshotapi.to
+    email: support@screenshotapi.to
+x-evidence:
+  harvested: '2026-08-02'
+  request: api-search/.github#2
+  probes:
+    - https://screenshotapi.to/openapi.json -> HTTP 200, OpenAPI 3.1.0, 2 paths / 3 ops / 2 schemas
+    - https://screenshotapi.to/llms.txt -> HTTP 200, 35,683 bytes
+    - https://screenshotapi.to/llms-full.txt -> HTTP 200, 302,110 bytes
+    - https://screenshotapi.to/docs/llms.txt -> HTTP 200, 299,708 bytes
+    - https://screenshotapi.to/llms-install.md -> HTTP 200, text/markdown
+    - https://screenshotapi.to/ai-agents -> HTTP 200
+    - https://screenshotapi.to/pricing -> HTTP 200
+    - https://screenshotapi.to/apis.json -> HTTP 404 (advertised in the submission; does not exist)
+    - https://screenshotapi.to/.well-known/mcp.json -> HTTP 404
+  not_asserted:
+    apis_json: >-
+      The submission gave https://screenshotapi.to/apis.json as the descriptor URL. It returns 404
+      and serves an HTML error page, so this profile was built from the OpenAPI and llms.txt
+      instead. Worth telling the provider — it is what they advertise.
+    mcp: >-
+      screenshotapi.to/mcp documents four MCP tools, but the page states the server "runs locally
+      over stdio today" with "npm publication pending namespace confirmation". A local-install MCP
+      is not a hosted endpoint, so no MCP property is emitted — only this note. Revisit once it is
+      published and reachable.
+  note: >-
+    Built from the provider's published OpenAPI and llms.txt after their advertised apis.json was
+    found missing. Operation, path and schema counts were measured from the fetched spec. Rate
+    limits are not asserted — none were found published.

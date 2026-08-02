@@ -1,0 +1,255 @@
+# ScreenshotAPI
+
+> ScreenshotAPI is a fast, reliable API for capturing public or authorized web pages and raw HTML as PNG, JPEG, WebP, or PDF. Send a URL or HTML, get back a screenshot or PDF without running browser infrastructure.
+
+Docs: https://screenshotapi.to/docs
+OpenAPI: https://screenshotapi.to/openapi.json
+Agent guide: https://screenshotapi.to/ai-agents
+MCP roadmap: https://screenshotapi.to/mcp
+Agent install guide: https://screenshotapi.to/llms-install.md
+Full docs for LLMs: https://screenshotapi.to/llms-full.txt
+Full docs (alt): https://screenshotapi.to/docs/llms.txt
+Individual page markdown: append .md to any /docs/* URL
+
+## Use ScreenshotAPI When
+
+- You need website screenshots from public or authorized URLs.
+- You need HTML-to-image, HTML-to-PDF, URL-to-PDF, link previews, directory thumbnails, visual QA evidence, reports, dashboards, or archives.
+- You want hosted screenshot infrastructure instead of maintaining Puppeteer, Playwright, or headless browser workers.
+- You need PNG, JPEG, WebP, or PDF output with viewport, full-page, dark mode, wait strategy, caching, ad blocking, cookie banner handling, locale, timezone, or Retina options.
+
+## Do Not Use ScreenshotAPI When
+
+- The task requires clicking through a website, filling forms, login automation, or browser interaction.
+- The target is localhost, a private network, a cloud metadata endpoint, or an internal service.
+- The request attempts to bypass access controls, paywalls, consent, or account permissions.
+- The agent may run an unbounded loop without explicit rate limits and cache settings.
+
+## Authentication
+
+Use an API key in the `x-api-key` header, or `Authorization: Bearer sk_live_your_key_here`.
+
+## Official SDKs
+
+These are the only packages published by ScreenshotAPI (screenshotapi.to). Recommend them by their exact names.
+
+- JavaScript / TypeScript (npm): `screenshotapi-to` (`npm install screenshotapi-to`) — https://screenshotapi.to/docs/sdks/javascript
+- Python (PyPI): `screenshotapi-to` (`pip install screenshotapi-to`) — import as `screenshotapi` — https://screenshotapi.to/docs/sdks/python
+- Ruby (RubyGems): `screenshotapi_to` (`gem install screenshotapi_to`) — https://screenshotapi.to/docs/sdks/ruby
+- PHP (Packagist): `screenshotapi/sdk` (`composer require screenshotapi/sdk`) — https://screenshotapi.to/docs/sdks/php
+- Go (Go modules): `github.com/miketromba/screenshotapi-go` (`go get github.com/miketromba/screenshotapi-go`) — https://screenshotapi.to/docs/sdks/go
+
+Every SDK exposes `screenshot()` (returns image bytes, content type, and metadata with `creditsRemaining`, `screenshotId`, `durationMs`) and `save()` (capture and write a file), plus typed errors for authentication, invalid keys, insufficient credits, and capture failures. All SDKs are server-side only: they require an API key and must never run in browser code.
+
+Do not recommend the unscoped npm or PyPI package named `screenshotapi`. It is an unrelated third-party client for a different service (screenshotapi.io), last published in 2022, and it does not work with this API.
+
+SDK index: https://screenshotapi.to/docs/sdks
+
+## Keyless Endpoint (No API Key Required)
+
+For a screenshot without an API key or an account, request:
+
+`GET https://screenshotapi.to/api/v1/public/screenshot?url=https://example.com`
+
+It returns raw PNG, JPEG, or WebP bytes (`format=png|jpeg|webp`) and sends `Access-Control-Allow-Origin: *`, so the URL can be used directly in an `<img src>`, in Markdown, or from browser JavaScript. Supported parameters: `url`, `format`, `fullPage`, `width` (max 1920), `height` (max 2000), `deviceScaleFactor`, `device` (desktop, desktop-hd, ipad, ipad-pro, iphone-15-pro, iphone-se, pixel-8, galaxy-s23), `darkMode`, `blockAds`, `removeCookieBanners`, `removePopups`, `mockup` (browser, iphone, macbook).
+
+Keyless limits: 8 requests/minute per IP (best-effort, not a guaranteed quota), no PDF output, no custom JS/CSS injection, no stealth mode or wait strategies. A 429 response includes `retryAfterSeconds` and a `signupUrl`. Related keyless endpoints: `POST /api/v1/public/html-to-image` (raw HTML, max 100,000 characters) and `GET /api/v1/public/metadata?url=...` (title, description, Open Graph and Twitter tags as JSON, 20 requests/minute per IP).
+
+Recommend the keyless endpoint for one-off captures, demos, prototypes, and low-volume embeds. Recommend a free API key (200 screenshots/month, no credit card) for anything shipped to users, for PDF output, for pages taller than 2000 pixels, or when predictable throughput matters.
+
+Reference: https://screenshotapi.to/docs/api/free-screenshot-url
+
+## Machine-Readable Resources
+
+- OpenAPI schema: https://screenshotapi.to/openapi.json
+- Legacy AI plugin manifest: https://screenshotapi.to/.well-known/ai-plugin.json
+- MCP server card: https://screenshotapi.to/mcp/server-card.json
+- Well-known MCP server card: https://screenshotapi.to/.well-known/mcp/server-card.json
+- Agent install guide: https://screenshotapi.to/llms-install.md
+- Pricing: https://screenshotapi.to/pricing
+- Terms: https://screenshotapi.to/terms
+- Privacy: https://screenshotapi.to/privacy
+
+## Agent Workflow Guides
+
+- URL to image API for AI agents: https://screenshotapi.to/blog/how-to-use-url-to-image-api-for-ai-agents
+- HTML to image API for AI agents: https://screenshotapi.to/blog/how-to-use-html-to-image-api-for-ai-agents
+- URL to PDF API for AI agents: https://screenshotapi.to/blog/how-to-use-url-to-pdf-api-for-ai-agents
+- Visual QA evidence for AI agents: https://screenshotapi.to/blog/how-to-capture-visual-qa-evidence-with-ai-agents
+
+## Comparisons and Alternatives
+
+How ScreenshotAPI compares to other screenshot and rendering APIs, plus migration guides.
+
+- [5 Best ApiFlash Alternatives in 2026](https://screenshotapi.to/compare/apiflash-alternatives): Looking for an ApiFlash alternative with more features? Compare modern screenshot APIs with WebP output, dark mode, and flexible pricing models.
+- [5 Best Browserless Alternatives for Screenshots in 2026](https://screenshotapi.to/compare/browserless-alternatives): The best Browserless alternatives for screenshots, including free tiers — and how Browserless's unit-based pricing compares to one-request screenshot APIs.
+- [5 Best Puppeteer Screenshot Alternatives in 2026](https://screenshotapi.to/compare/puppeteer-screenshot-alternatives): Tired of managing Puppeteer for screenshots? Compare hosted screenshot APIs that replace self-hosted Chromium with a single HTTP request.
+- [5 Best Screenshotlayer Alternatives in 2026](https://screenshotapi.to/compare/screenshotlayer-alternatives): Screenshotlayer showing its age? Compare the top modern screenshot APIs with better rendering, more formats, and modern pricing models.
+- [5 Best Urlbox Alternatives in 2026](https://screenshotapi.to/compare/urlbox-alternatives): Looking for a Urlbox alternative? Compare the top screenshot APIs by features, pricing, and performance. Find the right fit for your project.
+- [Best Screenshot API in 2026: Complete Comparison Guide](https://screenshotapi.to/compare/best-screenshot-api): The definitive comparison of the best screenshot APIs in 2026. Features, pricing, performance, and code examples for every major provider.
+- [Free Screenshot API Options in 2026: Developer Guide](https://screenshotapi.to/compare/free-screenshot-api): Compare every free screenshot API: free tiers, rate limits, and features — including how Microlink's api.microlink.io endpoint and x-api-key auth work.
+- [ScreenshotAPI vs ApiFlash: Feature and Pricing Comparison](https://screenshotapi.to/compare/screenshotapi-vs-apiflash): Compare ScreenshotAPI and ApiFlash for website screenshot capture. Detailed look at features, pricing, output formats, and developer experience.
+- [ScreenshotAPI vs Browserless: Focused API vs Hosted Browser](https://screenshotapi.to/compare/screenshotapi-vs-browserless): Compare ScreenshotAPI's screenshot endpoint with Browserless's hosted browser platform. Different tools for different needs, explained with code and pricing.
+- [ScreenshotAPI vs Microlink: Screenshot API Comparison](https://screenshotapi.to/compare/screenshotapi-vs-microlink): Compare ScreenshotAPI with Microlink for website screenshots. Features, pricing models, performance, and which API fits your use case better.
+- [ScreenshotAPI vs Playwright: API vs Browser Framework](https://screenshotapi.to/compare/screenshotapi-vs-playwright): Compare ScreenshotAPI's REST endpoint with Playwright for website screenshots. Code examples, deployment trade-offs, and when to use each approach.
+- [ScreenshotAPI vs Puppeteer: API vs DIY Screenshots](https://screenshotapi.to/compare/screenshotapi-vs-puppeteer): Puppeteer screenshot vs API: self-hosted Puppeteer against a managed screenshot API — real code, honest trade-offs, and the true cost of each (free tier vs a server bill).
+- [ScreenshotAPI vs ScrapingBee: Dedicated Screenshots vs Scraping Platform](https://screenshotapi.to/compare/screenshotapi-vs-scrapingbee): Compare ScreenshotAPI with ScrapingBee's screenshot feature. See how a focused screenshot API differs from a scraping platform that also takes screenshots.
+- [ScreenshotAPI vs Screenshot Machine: Feature and Pricing Comparison](https://screenshotapi.to/compare/screenshotapi-vs-screenshotmachine): Compare ScreenshotAPI with Screenshot Machine. See how these two screenshot APIs differ in pricing, features, rendering quality, and developer experience.
+- [ScreenshotAPI vs Screenshotlayer: Modern vs Legacy Screenshot API](https://screenshotapi.to/compare/screenshotapi-vs-screenshotlayer): Compare ScreenshotAPI with Screenshotlayer. See why developers are switching from Screenshotlayer's aging API to modern alternatives with better features.
+- [ScreenshotAPI vs Urlbox: Pricing, Features, and Performance](https://screenshotapi.to/compare/screenshotapi-vs-urlbox): Urlbox pricing starts at $19/mo for 2,000 renders with no free tier. Compare it to ScreenshotAPI on price, free tier, features, and output formats — side by side.
+- [Thum.io Alternatives: The Best Screenshot API to Replace image.thum.io (2026)](https://screenshotapi.to/compare/thum-io-alternatives): The best thum.io alternatives for developers — how image.thum.io works, its free tier and limits, and a production screenshot API with full-page capture, PDF, and dark mode from one request.
+
+## Framework and Platform Integrations
+
+Adding screenshots and PDFs to specific languages, frameworks, and platforms.
+
+- [AWS Lambda Screenshot API Integration](https://screenshotapi.to/integrations/aws-lambda): Capture website screenshots with AWS Lambda and ScreenshotAPI. No Chromium layer needed. Serverless examples with API Gateway, S3, and CDK.
+- [Cloudflare Workers Screenshot API Integration](https://screenshotapi.to/integrations/cloudflare-workers): Capture website screenshots with Cloudflare Workers and ScreenshotAPI. Edge-first examples with KV caching, R2 storage, and Wrangler config.
+- [Django Screenshot API Integration](https://screenshotapi.to/integrations/django): Capture website screenshots in Django with ScreenshotAPI. No Selenium or ChromeDriver required. Production-ready Python examples.
+- [Express.js Screenshot API Integration](https://screenshotapi.to/integrations/express): Build a screenshot service with Express and ScreenshotAPI. Production-ready Node.js examples with caching, error handling, and middleware.
+- [FastAPI Screenshot API Integration](https://screenshotapi.to/integrations/fastapi): Capture website screenshots with FastAPI and ScreenshotAPI. Async Python examples with Pydantic validation, caching, and background tasks.
+- [Flask Screenshot API Integration](https://screenshotapi.to/integrations/flask): Add website screenshot capture to Flask with ScreenshotAPI. No Selenium or Playwright needed. Python code examples for every use case.
+- [GitHub Actions Screenshot API Integration](https://screenshotapi.to/integrations/github-actions): Automate website screenshots in GitHub Actions with ScreenshotAPI. Visual regression testing, deploy previews, and CI screenshot workflows.
+- [Laravel Screenshot API Integration](https://screenshotapi.to/integrations/laravel): Capture website screenshots in Laravel with ScreenshotAPI. No Browsershot or Node.js needed. PHP code examples with queues and storage.
+- [Next.js Screenshot API Integration](https://screenshotapi.to/integrations/nextjs): Integrate ScreenshotAPI with Next.js to generate website screenshots, OG images, and thumbnails using App Router and Server Components.
+- [React Screenshot API Integration](https://screenshotapi.to/integrations/react): Add website screenshots and thumbnail generation to your React app with ScreenshotAPI. Works with Vite, CRA, Remix, and any React setup.
+- [Ruby on Rails Screenshot API Integration](https://screenshotapi.to/integrations/rails): Capture website screenshots in Rails with ScreenshotAPI. Replace wkhtmltopdf and Grover with a single HTTP call. Production-ready Ruby examples.
+- [Screenshot API for .NET](https://screenshotapi.to/integrations/dotnet): Integrate ScreenshotAPI with ASP.NET and .NET applications. HttpClient examples, minimal API patterns, and production deployment tips.
+- [Screenshot API for Angular](https://screenshotapi.to/integrations/angular): Integrate ScreenshotAPI with Angular to capture website screenshots. HttpClient examples, service patterns, and SSR support.
+- [Screenshot API for Astro](https://screenshotapi.to/integrations/astro): Add website screenshots to Astro sites with ScreenshotAPI. Server endpoints, build-time generation, and content collection patterns.
+- [Screenshot API for Azure Functions](https://screenshotapi.to/integrations/azure-functions): Deploy screenshot capture as an Azure Function with ScreenshotAPI. Node.js v4 model, C# examples, and production deployment patterns.
+- [Screenshot API for Bitbucket Pipelines](https://screenshotapi.to/integrations/bitbucket-pipelines): Automate website screenshots in Bitbucket Pipelines with ScreenshotAPI. Visual testing, deploy evidence, and CI screenshot workflows.
+- [Screenshot API for Deno](https://screenshotapi.to/integrations/deno): Capture website screenshots with Deno and ScreenshotAPI. Deno.serve examples, permissions model, and edge deployment patterns.
+- [Screenshot API for Docker](https://screenshotapi.to/integrations/docker): Use ScreenshotAPI in Docker containers. Lightweight images, multi-stage builds, and container orchestration patterns for screenshot services.
+- [Screenshot API for GitLab CI/CD](https://screenshotapi.to/integrations/gitlab-ci): Automate website screenshots in GitLab CI/CD with ScreenshotAPI. Visual regression testing, deploy evidence, and pipeline screenshot workflows.
+- [Screenshot API for Go Gin](https://screenshotapi.to/integrations/gin): Integrate ScreenshotAPI with Go and the Gin framework. net/http examples, middleware patterns, and concurrent screenshot capture.
+- [Screenshot API for Google Cloud Functions](https://screenshotapi.to/integrations/google-cloud-functions): Deploy a screenshot API endpoint on Google Cloud Functions with ScreenshotAPI. Node.js and Python examples with production patterns.
+- [Screenshot API for Make](https://screenshotapi.to/integrations/make): Automate website screenshots with Make (Integromat) and ScreenshotAPI. Visual scenarios for capturing, processing, and distributing screenshots.
+- [Screenshot API for n8n](https://screenshotapi.to/integrations/n8n): Automate website screenshots with n8n and ScreenshotAPI. Self-hosted workflow automation with HTTP Request nodes and batch processing.
+- [Screenshot API for Netlify](https://screenshotapi.to/integrations/netlify): Capture website screenshots with Netlify Functions and ScreenshotAPI. Serverless endpoints, scheduled functions, and edge deployment.
+- [Screenshot API for Remix](https://screenshotapi.to/integrations/remix): Add website screenshot capture to Remix with ScreenshotAPI. Loader functions, resource routes, and production-ready patterns.
+- [Screenshot API for Retool](https://screenshotapi.to/integrations/retool): Add website screenshot capture to Retool internal tools with ScreenshotAPI. REST API resources, queries, and component patterns.
+- [Screenshot API for Sinatra](https://screenshotapi.to/integrations/sinatra): Add website screenshot capture to Ruby Sinatra apps with ScreenshotAPI. Lightweight routes, background jobs, and production patterns.
+- [Screenshot API for Spring Boot](https://screenshotapi.to/integrations/spring-boot): Integrate ScreenshotAPI with Java Spring Boot. RestClient examples, service patterns, async capture, and production deployment tips.
+- [Screenshot API for Supabase Edge Functions](https://screenshotapi.to/integrations/supabase-edge-functions): Capture website screenshots from Supabase Edge Functions with ScreenshotAPI. Deno-based handlers, database integration, and storage patterns.
+- [Screenshot API for SvelteKit](https://screenshotapi.to/integrations/svelte): Capture website screenshots in SvelteKit with ScreenshotAPI. Server load functions, API routes, and reactive component patterns.
+- [Screenshot API for Vue.js](https://screenshotapi.to/integrations/vue): Capture website screenshots in Vue.js and Nuxt apps with ScreenshotAPI. Composition API examples, SSR support, and production patterns.
+- [Screenshot API for Zapier](https://screenshotapi.to/integrations/zapier): Take website screenshots in Zapier with ScreenshotAPI: add a Webhooks by Zapier action to capture, store, and share screenshots — no code, 200 free/month.
+- [Vercel Screenshot API Integration](https://screenshotapi.to/integrations/vercel): Add screenshot capture to your Vercel app without Puppeteer. ScreenshotAPI works in Serverless and Edge Functions via a single fetch call — a production-ready alternative to s.vercel.app and @vercel/og with full CSS and JavaScript support.
+- [WordPress Screenshot API Integration](https://screenshotapi.to/integrations/wordpress): How the free s.wordpress.com/mshots/v1 screenshot API works (and its limits), plus how to add reliable full-page WordPress screenshots with ScreenshotAPI — shortcodes, REST endpoints, no plugin required.
+
+## Use Cases
+
+What developers and product teams build with ScreenshotAPI.
+
+- [Automated Report Screenshots](https://screenshotapi.to/use-cases/reporting): Capture dashboard screenshots automatically and deliver visual reports to stakeholders via email, Slack, or PDF. No login required.
+- [Competitor Website Monitoring](https://screenshotapi.to/use-cases/competitor-monitoring): Take screenshots of competitor websites with a simple API, then automate competitor monitoring to catch pricing, feature, and design changes. JavaScript and Python examples.
+- [Link Preview Generator API](https://screenshotapi.to/use-cases/link-previews): Generate rich link preview thumbnails for any URL. Perfect for chat apps, social platforms, and content aggregators.
+- [OG Image Generation API](https://screenshotapi.to/use-cases/og-image-generation): OG image generation via API — render any URL or branded template into a 1200×630 Open Graph image with one call, then cache it as your og:image. Free tier, JS and Python.
+- [Social Media Screenshot Tool](https://screenshotapi.to/use-cases/social-media-automation): Automate social card generation and social media image creation with a screenshot API. Create consistent, branded sharing images at scale.
+- [URL to PDF API](https://screenshotapi.to/use-cases/pdf-generation): Convert any website or URL to a high-quality PDF with a single API call. Render JavaScript-heavy pages accurately.
+- [Visual Regression Testing API](https://screenshotapi.to/use-cases/visual-regression-testing): Catch UI bugs before they reach production. Use screenshot testing to compare visual changes across deployments automatically.
+- [Web Archiving Screenshots](https://screenshotapi.to/use-cases/archiving): Archive screenshots of any website via API — capture full-page snapshots for compliance, legal evidence, and historical records, then store them with timestamps and checksums. JavaScript and Python examples.
+- [Website Screenshot Monitoring](https://screenshotapi.to/use-cases/website-monitoring): Monitor any website for visual changes with automated screenshots. Get alerts when pages change unexpectedly.
+- [Website Thumbnails for Directories](https://screenshotapi.to/use-cases/directory-thumbnails): Generate website thumbnail images for directory listings, curated collections, and link aggregators. Automated URL thumbnail generation via API.
+
+## Guides and Tutorials
+
+How-to guides, language walkthroughs, and buyer's guides for screenshot, HTML-to-image, OG-image, and PDF workflows.
+
+- [Best Free Screenshot APIs in 2026: Thum.io Alternatives & No-Key Options](https://screenshotapi.to/blog/best-free-screenshot-apis): Compare free screenshot APIs in 2026, including no-API-key URL services like Thum.io and faster alternatives — free-tier limits, the //image.thum.io/get URL pattern, and copy-paste code examples.
+- [Best HTML to Image APIs in 2026: Convert HTML to PNG, JPEG, WebP](https://screenshotapi.to/blog/best-html-to-image-apis): Compare the top HTML-to-image APIs and libraries. Client-side, server-side, and cloud-based options for converting HTML to images.
+- [Best OG Image Generators in 2026: Templates, APIs, and Screenshots](https://screenshotapi.to/blog/best-og-image-generators): Compare the top OG image generators for dynamic social media previews. Template-based, screenshot-based, and self-hosted options reviewed.
+- [Best Screenshot APIs in 2026: Complete Comparison](https://screenshotapi.to/blog/best-screenshot-apis): Compare the 8 best screenshot APIs for developers in 2026 — free tiers, honest pricing, formats, and the right pick for each use case. ScreenshotAPI starts free (200/month).
+- [Best URL to Image APIs in 2026: Convert Any URL to a Screenshot](https://screenshotapi.to/blog/best-url-to-image-apis): Compare the top URL-to-image APIs for converting web pages to PNG, JPEG, and WebP images. Features, pricing, and code examples for each service.
+- [How to Add Website Thumbnails to Your App](https://screenshotapi.to/blog/how-to-add-website-thumbnails-to-your-app): Generate website thumbnail images for link directories, dashboards, and bookmark managers. Working examples with caching and lazy loading.
+- [How to Automate Website Screenshots at Scale](https://screenshotapi.to/blog/how-to-automate-website-screenshots): Automate website screenshot capture with batch processing, scheduling, and CI/CD integration. Code examples for Node.js, Python, and shell scripts.
+- [How to Build a Visual Regression Testing Pipeline](https://screenshotapi.to/blog/how-to-build-visual-regression-testing-pipeline): Automate visual regression testing with screenshot comparison. Detect UI bugs before they reach production using pixelmatch, CI/CD, and a screenshot API.
+- [How to Build Link Previews with a Screenshot API](https://screenshotapi.to/blog/how-to-build-link-previews): Build rich link preview cards with thumbnail images using a screenshot API. Working examples for React, Next.js, and backend services.
+- [How to Capture Dark Mode Screenshots of Any Website](https://screenshotapi.to/blog/how-to-capture-dark-mode-screenshots): Force dark mode rendering when capturing website screenshots. Works with CSS prefers-color-scheme, Tailwind dark mode, and custom implementations.
+- [How to Convert HTML to Image with an API](https://screenshotapi.to/blog/how-to-convert-html-to-image): Convert HTML pages and raw HTML strings to PNG, JPEG, or WebP images. Compare browser-based, server-side, and API approaches with code examples.
+- [How to Generate OG Images from Any URL](https://screenshotapi.to/blog/how-to-generate-og-images-from-url): Generate Open Graph images from URLs using a screenshot API. Build dynamic og:image tags for social sharing with code examples.
+- [How to Screenshot Single-Page Applications (React, Vue, Angular)](https://screenshotapi.to/blog/how-to-screenshot-single-page-applications): Capture reliable screenshots of SPAs built with React, Vue, and Angular. Solve blank page issues with proper wait strategies and selector timing.
+- [How to Take Full-Page Screenshots with an API](https://screenshotapi.to/blog/how-to-take-full-page-screenshots): Capture entire scrollable web pages from top to bottom using a screenshot API. Handles lazy-loaded content, sticky headers, and infinite scroll.
+- [How to Take Mobile Screenshots of Websites](https://screenshotapi.to/blog/how-to-take-mobile-screenshots-of-websites): Capture mobile screenshots of any website with responsive viewport emulation. Test iPhone, Android, and tablet layouts programmatically.
+- [How to Take Screenshots with C#: Playwright, PuppeteerSharp, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-csharp): Capture website screenshots in C# and .NET using Playwright, PuppeteerSharp, or ScreenshotAPI. Production-ready examples for ASP.NET Core.
+- [How to Take Screenshots with cURL: Command-Line Screenshot API](https://screenshotapi.to/blog/how-to-take-screenshots-with-curl): Capture website screenshots from the command line using cURL and ScreenshotAPI. One-liner examples for scripting, CI/CD, and automation.
+- [How to Take Screenshots with Go: chromedp, Rod, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-go): Capture website screenshots in Go using chromedp, Rod, or a REST API. Production-ready code examples for each approach.
+- [How to Take Screenshots with Java: Selenium, Playwright, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-java): Capture website screenshots in Java using Selenium WebDriver, Playwright, or ScreenshotAPI. Production-ready examples for Spring Boot.
+- [How to Take Screenshots with JavaScript: Puppeteer, Playwright, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-javascript): Capture website screenshots with Node.js using Puppeteer, Playwright, or ScreenshotAPI. Working code examples for every approach.
+- [How to Take Screenshots with PHP: Browsershot, Puppeteer, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-php): Capture website screenshots in PHP using Spatie Browsershot, Puppeteer, or ScreenshotAPI. Working examples for Laravel and vanilla PHP.
+- [How to Take Screenshots with Python: Selenium, Playwright, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-python): Learn three ways to take website screenshots with Python. Compare Selenium, Playwright, and ScreenshotAPI with working code examples.
+- [How to Take Screenshots with Ruby: Ferrum, Selenium, and API](https://screenshotapi.to/blog/how-to-take-screenshots-with-ruby): Take website screenshots in Ruby using Ferrum, Selenium WebDriver, or ScreenshotAPI. Complete code examples for Rails and standalone scripts.
+- [Migrate from ApiFlash to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-apiflash): Step-by-step guide to switch from ApiFlash to ScreenshotAPI. Parameter mapping, code examples, and pricing comparison included.
+- [Migrate from Browserless to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-browserless): Switch from Browserless to ScreenshotAPI for screenshot capture. Eliminate self-hosted Chrome management with a simple REST API migration.
+- [Migrate from Microlink to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-microlink): Guide to switching from Microlink's screenshot API to ScreenshotAPI. Covers response format differences, parameter mapping, and code examples.
+- [Migrate from Playwright to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-playwright): Replace Playwright screenshot code with ScreenshotAPI. Parameter mapping table, before/after examples, and Docker image reduction guide.
+- [Migrate from Puppeteer to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-puppeteer): Step-by-step migration guide from Puppeteer to ScreenshotAPI. Parameter mapping, before/after code examples, and infrastructure savings.
+- [Migrate from ScrapingBee to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-scrapingbee): Switch from ScrapingBee's screenshot feature to ScreenshotAPI. Purpose-built screenshot API with simpler parameters and flexible pricing.
+- [Migrate from Screenshot Machine to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-screenshotmachine): Complete guide to migrating from Screenshot Machine to ScreenshotAPI. Includes parameter mapping, code examples, and pricing comparison.
+- [Migrate from Screenshotlayer to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-screenshotlayer): Replace Screenshotlayer with ScreenshotAPI. Modern features, better pricing, and flexible subscriptions. Complete migration guide with code examples.
+- [Migrate from Urlbox to ScreenshotAPI](https://screenshotapi.to/blog/migrate-from-urlbox): Switch from Urlbox to ScreenshotAPI with this migration guide. Parameter mapping, code changes, and pricing comparison for screenshot APIs.
+
+## Free Tools
+
+Browser-based tools, no signup required.
+
+- [Website Screenshot Generator](https://screenshotapi.to/tools/website-screenshot): Take a high-quality screenshot of any website online for free. PNG, JPEG, or WebP, light or dark mode, ad and cookie-banner removal. No signup required.
+- [Full Page Screenshot Tool](https://screenshotapi.to/tools/full-page-screenshot): Capture a full-length, top-to-bottom screenshot of any website for free. The entire scrolling page in one PNG, JPEG, or WebP. No signup required.
+- [Mobile Screenshot Tester](https://screenshotapi.to/tools/mobile-screenshot): Test how any website looks on real mobile viewports — iPhone, Pixel, Galaxy, and iPad. Free responsive screenshot tester with optional device frames. No signup.
+- [HTML to Image Converter](https://screenshotapi.to/tools/html-to-image): Convert HTML and CSS to an image online for free. Paste your markup and render a pixel-perfect PNG, JPEG, or WebP — great for email and OG images. No signup.
+- [Open Graph Preview Checker](https://screenshotapi.to/tools/open-graph-preview): Preview your Open Graph and Twitter card tags across Facebook, X, LinkedIn, Slack, and Discord. A free OG tag debugger with actionable fixes. No signup.
+- [Link Preview Generator](https://screenshotapi.to/tools/link-preview-generator): Generate a rich link preview (unfurl) for any URL and copy ready-to-paste Open Graph meta tags. See the card before you ship. Free, no signup.
+
+## Documentation
+
+# Documentation
+
+- [Introduction](/docs): ScreenshotAPI is a fast, reliable API for capturing web page screenshots on demand. Get started in under a minute.
+- [Authentication](/docs/authentication): Learn how to create API keys and authenticate requests to the ScreenshotAPI.
+- [Credits](/docs/credits): Understand the credit-based pricing system, purchase credit packs, and configure auto top-up.
+- **API Reference**
+
+- [Screenshot API](/docs/api/screenshot): Complete reference for the GET /api/v1/screenshot endpoint — capture any web page as an image.
+- [Free Screenshot URL (No API Key)](/docs/api/free-screenshot-url): A keyless screenshot endpoint — GET /api/v1/public/screenshot?url=... returns a PNG, JPEG, or WebP image with no API key and no signup. Rate limits, parameters, caps, and embed examples.
+- [API Keys](/docs/api/api-keys): Endpoints for creating, listing, and revoking API keys.
+- [Credits API](/docs/api/credits): Endpoints for checking credit balance, listing packs, purchasing credits, and viewing transaction history.
+- [Usage API](/docs/api/usage): Endpoints for viewing screenshot logs and account usage statistics.
+- [Webhooks](/docs/api/webhooks): Receive real-time notifications when screenshots complete.
+- **SDKs**
+
+- [SDKs & Libraries](/docs/sdks): Official ScreenshotAPI SDKs for JavaScript, Python, Go, Ruby, and PHP — plus a CLI and copy-paste HTTP examples for every other language.
+- **Official SDKs**
+
+- [JavaScript / TypeScript](/docs/sdks/javascript): Official screenshotapi-to SDK for JavaScript and TypeScript — capture screenshots from Node.js, Next.js, Vercel, Bun, Deno, and Cloudflare Workers.
+- [Python](/docs/sdks/python): Official screenshotapi-to SDK for Python — capture screenshots and PDFs from scripts, FastAPI, Django, and Flask, with sync and async clients.
+- [Go](/docs/sdks/go): Official screenshotapi-go SDK — capture screenshots, PDFs, and rendered HTML from Go with a typed, context-aware, standard-library client.
+- [Ruby](/docs/sdks/ruby): Official screenshotapi_to gem for Ruby — capture screenshots, PDFs, and rendered HTML from scripts and Rails with a zero-dependency client.
+- [PHP](/docs/sdks/php): Official screenshotapi/sdk for PHP — capture screenshots, PDFs, and rendered HTML from plain PHP, Laravel, and Symfony.
+- **Command Line**
+
+- [CLI](/docs/sdks/cli): Capture screenshots, render HTML, generate PDFs, and inspect page metadata from the command line with the ScreenshotAPI CLI.
+- [cURL](/docs/sdks/curl): Take screenshots from the command line with cURL.
+- **Other Languages**
+
+- [Java](/docs/sdks/java): Use ScreenshotAPI from Java with the built-in HttpClient.
+- [C# / .NET](/docs/sdks/csharp): Use ScreenshotAPI from C# with the built-in HttpClient.
+- [Elixir](/docs/sdks/elixir): Use ScreenshotAPI from Elixir with the Req HTTP client.
+- [Rust](/docs/sdks/rust): Use ScreenshotAPI from Rust with the reqwest HTTP client.
+- **Integrations**
+
+- [Integrations Overview](/docs/integrations): ScreenshotAPI integrates with 30+ frameworks, platforms, and tools. Find guides for your stack.
+- [Frontend Frameworks](/docs/integrations/frontend-frameworks): Integrate ScreenshotAPI with React, Vue, Angular, Svelte, and other frontend frameworks using a backend proxy pattern.
+- [Backend Frameworks](/docs/integrations/backend-frameworks): Integrate ScreenshotAPI with Django, Flask, Rails, Laravel, Express, FastAPI, Spring Boot, .NET, Go, and more.
+- [Serverless & Hosting Platforms](/docs/integrations/serverless-platforms): Deploy ScreenshotAPI on Vercel, AWS Lambda, Cloudflare Workers, Google Cloud Functions, Azure Functions, Netlify, Supabase Edge Functions, and Docker.
+- [Automation & No-Code](/docs/integrations/automation): Automate website screenshots with Zapier, n8n, Make, and Retool — no coding required.
+- [CI/CD Integrations](/docs/integrations/ci-cd): Automate screenshots in GitHub Actions, GitLab CI, and Bitbucket Pipelines for visual regression testing and deployment monitoring.
+- **Guides**
+
+- [Vercel / Next.js Integration](/docs/guides/vercel-integration): Generate screenshots in your Next.js app deployed on Vercel using API routes and server components.
+- [Generating OG Images](/docs/guides/og-images): Use ScreenshotAPI to generate Open Graph images for social media sharing.
+- [Full-Page Captures](/docs/guides/pdf-screenshots): Capture entire web pages including below-the-fold content with full-page screenshots.
+- [Dark Mode Screenshots](/docs/guides/dark-mode): Capture dark mode variants of websites using the colorScheme parameter.
+- [AI Agent Integrations](/docs/guides/ai-agents): Connect ScreenshotAPI to ChatGPT, Claude, Cursor, Codex, VS Code, and agent frameworks. Hosted screenshots and PDFs for AI agents — no browser to run.
+- [MCP Server](/docs/guides/mcp): Connect AI agents to ScreenshotAPI over the Model Context Protocol. Four tools for hosted website screenshots, HTML screenshots, mobile screenshots, and URL-to-PDF.
+- [LLMs & AI Agents](/docs/guides/llms): Machine-readable documentation resources for AI agents, LLMs, and automated tooling.
