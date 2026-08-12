@@ -24,29 +24,20 @@ tags:
   - Visual Testing
   - Agent-readable
 apis:
-  - name: ScreenshotAPI
-    description: >-
-      Capture a public or authorized web page, or raw HTML, as PNG, JPEG, WebP or PDF. Three
-      operations across two paths — GET and POST on the screenshot resource, plus a health check.
-      OpenAPI 3.1.0 with two component schemas (ScreenshotRequest, ErrorResponse). Authenticates
-      with an API key in the x-api-key header or a bearer token.
-    humanURL: https://screenshotapi.to/docs
-    baseURL: https://screenshotapi.to
-    tags:
-      - Screenshots
-      - URL to Image
-      - URL to PDF
-      - HTML to Image
-      - Developer Tools
-    properties:
-      - type: OpenAPI
-        url: openapi/screenshotapi-to-openapi.json
-      - type: OpenAPI
-        url: https://screenshotapi.to/openapi.json
-      - type: Documentation
-        url: https://screenshotapi.to/docs
-      - type: Pricing
-        url: https://screenshotapi.to/pricing
+- aid: screenshotapi-to:screenshotapi-to-screenshots-api
+  name: ScreenshotAPI Screenshots API
+  description: Capture URLs or HTML as images or PDFs.
+  humanURL: https://screenshotapi.to/docs
+  baseURL: https://screenshotapi.to
+  tags:
+  - Screenshots
+  properties:
+  - type: OpenAPI
+    url: openapi/screenshotapi-to-screenshots-api-openapi.yml
+  - type: Documentation
+    url: https://screenshotapi.to/docs
+  - type: Pricing
+    url: https://screenshotapi.to/pricing
 properties:
   - type: Documentation
     url: https://screenshotapi.to/docs
