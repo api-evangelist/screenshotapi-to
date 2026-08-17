@@ -9,7 +9,7 @@ description: >-
   but runs locally over stdio and is not yet published to npm, so it is described here rather than
   advertised as a hosted endpoint. Not to be confused with ScreenshotAPI.net, a different company
   in the same category — see the screenshotapi-net entry.
-url: https://screenshotapi-to.apievangelist.com/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/screenshotapi-to/refs/heads/main/apis.yml
 created: '2026-08-02'
 modified: '2026-08-02'
 specificationVersion: '0.21'
