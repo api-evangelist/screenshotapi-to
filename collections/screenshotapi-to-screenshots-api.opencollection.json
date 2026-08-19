@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Screenshot Screenshots API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Screenshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Capture a URL screenshot or PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://screenshotapi.to/api/v1/screenshot",
+            "params": [
+              {
+                "name": "url",
+                "value": "https://example.com",
+                "type": "query",
+                "description": "Absolute http or https URL to capture. Public or authorized URLs only."
+              },
+              {
+                "name": "width",
+                "value": "",
+                "type": "query",
+                "description": "Viewport width in pixels. Maximum 1920."
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "Viewport height in pixels. Maximum 10000."
+              },
+              {
+                "name": "fullPage",
+                "value": "",
+                "type": "query",
+                "description": "Capture the full scrollable page."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Output format."
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "JPEG/WebP quality from 1 to 100."
+              },
+              {
+                "name": "colorScheme",
+                "value": "",
+                "type": "query",
+                "description": "Force light or dark color-scheme rendering."
+              },
+              {
+                "name": "waitUntil",
+                "value": "",
+                "type": "query",
+                "description": "Navigation lifecycle event to wait for before capture."
+              },
+              {
+                "name": "waitForSelector",
+                "value": "",
+                "type": "query",
+                "description": "CSS selector to wait for before capture."
+              },
+              {
+                "name": "delay",
+                "value": "",
+                "type": "query",
+                "description": "Additional delay in milliseconds after the page loads."
+              },
+              {
+                "name": "blockAds",
+                "value": "",
+                "type": "query",
+                "description": "Block common ad and tracker requests during capture."
+              },
+              {
+                "name": "removeCookieBanners",
+                "value": "",
+                "type": "query",
+                "description": "Hide and accept common cookie banners before capture."
+              },
+              {
+                "name": "cssInject",
+                "value": "",
+                "type": "query",
+                "description": "CSS to inject before capture. Maximum 10000 characters."
+              },
+              {
+                "name": "jsInject",
+                "value": "",
+                "type": "query",
+                "description": "JavaScript to evaluate before capture. Maximum 10000 characters."
+              },
+              {
+                "name": "stealthMode",
+                "value": "",
+                "type": "query",
+                "description": "Use stealth rendering for authorized targets."
+              },
+              {
+                "name": "devicePixelRatio",
+                "value": "",
+                "type": "query",
+                "description": "Retina/HiDPI capture scale."
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query",
+                "description": "IANA timezone to emulate, such as America/New_York."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "BCP 47 locale to emulate, such as en-US."
+              },
+              {
+                "name": "cacheTtl",
+                "value": "",
+                "type": "query",
+                "description": "Response cache TTL in seconds. Maximum 604800."
+              },
+              {
+                "name": "preloadFonts",
+                "value": "",
+                "type": "query",
+                "description": "Preload discovered Google Fonts before capture."
+              },
+              {
+                "name": "removeElements",
+                "value": ".popup,#newsletter",
+                "type": "query",
+                "description": "Comma-separated CSS selectors to remove before capture."
+              },
+              {
+                "name": "removePopups",
+                "value": "",
+                "type": "query",
+                "description": "Remove common popups, modals, and overlays."
+              },
+              {
+                "name": "mockupDevice",
+                "value": "",
+                "type": "query",
+                "description": "Wrap the screenshot in a device frame."
+              },
+              {
+                "name": "geoLatitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude for browser geolocation override."
+              },
+              {
+                "name": "geoLongitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude for browser geolocation override."
+              },
+              {
+                "name": "geoAccuracy",
+                "value": "",
+                "type": "query",
+                "description": "Geolocation accuracy in meters."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Capture a public or authorized URL as PNG, JPEG, WebP, or PDF. This endpoint returns binary image/PDF data directly."
+        },
+        {
+          "info": {
+            "name": "Capture HTML or URL screenshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://screenshotapi.to/api/v1/screenshot",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Capture raw HTML or a URL as PNG, JPEG, WebP, or PDF. Use POST when sending HTML, CSS, JavaScript, or larger structured options."
+        },
+        {
+          "info": {
+            "name": "Check API health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://screenshotapi.to/api/health"
+          },
+          "docs": "Returns API health status and server timestamp."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

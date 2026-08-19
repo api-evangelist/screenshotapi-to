@@ -1,0 +1,600 @@
+openapi: 3.2.0
+info:
+  title: Screenshot Screenshots API
+  version: 1.0.0
+  summary: Website screenshots, HTML screenshots, and PDFs via API.
+  description: ScreenshotAPI captures public or authorized web pages as PNG, JPEG, WebP, or PDF. Use it when an application or AI agent needs hosted screenshot infrastructure without running browsers.
+  termsOfService: https://screenshotapi.to/terms
+  contact:
+    name: ScreenshotAPI Support
+    email: support@screenshotapi.to
+    url: mailto:support@screenshotapi.to
+  license:
+    name: Proprietary
+servers:
+- url: https://screenshotapi.to
+tags:
+- name: Screenshots
+  description: Capture URLs or HTML as images or PDFs.
+paths:
+  /api/v1/screenshot:
+    get:
+      tags:
+      - Screenshots
+      operationId: captureScreenshot
+      summary: Capture a URL screenshot or PDF
+      description: Capture a public or authorized URL as PNG, JPEG, WebP, or PDF. This endpoint returns binary image/PDF data directly.
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: Absolute http or https URL to capture. Public or authorized URLs only.
+        schema:
+          type: string
+          format: uri
+        example: https://example.com
+      - name: width
+        in: query
+        description: Viewport width in pixels. Maximum 1920.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1920
+          default: 1440
+      - name: height
+        in: query
+        description: Viewport height in pixels. Maximum 10000.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+          default: 900
+      - name: fullPage
+        in: query
+        description: Capture the full scrollable page.
+        schema:
+          type: boolean
+          default: false
+      - name: type
+        in: query
+        description: Output format.
+        schema:
+          type: string
+          enum:
+          - png
+          - jpeg
+          - webp
+          - pdf
+          default: png
+      - name: quality
+        in: query
+        description: JPEG/WebP quality from 1 to 100.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      - name: colorScheme
+        in: query
+        description: Force light or dark color-scheme rendering.
+        schema:
+          type: string
+          enum:
+          - light
+          - dark
+      - name: waitUntil
+        in: query
+        description: Navigation lifecycle event to wait for before capture.
+        schema:
+          type: string
+          enum:
+          - load
+          - domcontentloaded
+          - networkidle0
+          - networkidle2
+          default: networkidle2
+      - name: waitForSelector
+        in: query
+        description: CSS selector to wait for before capture.
+        schema:
+          type: string
+          maxLength: 500
+      - name: delay
+        in: query
+        description: Additional delay in milliseconds after the page loads.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 30000
+          default: 0
+      - name: blockAds
+        in: query
+        description: Block common ad and tracker requests during capture.
+        schema:
+          type: boolean
+          default: false
+      - name: removeCookieBanners
+        in: query
+        description: Hide and accept common cookie banners before capture.
+        schema:
+          type: boolean
+          default: false
+      - name: cssInject
+        in: query
+        description: CSS to inject before capture. Maximum 10000 characters.
+        schema:
+          type: string
+          maxLength: 10000
+      - name: jsInject
+        in: query
+        description: JavaScript to evaluate before capture. Maximum 10000 characters.
+        schema:
+          type: string
+          maxLength: 10000
+      - name: stealthMode
+        in: query
+        description: Use stealth rendering for authorized targets.
+        schema:
+          type: boolean
+          default: false
+      - name: devicePixelRatio
+        in: query
+        description: Retina/HiDPI capture scale.
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          default: 1
+      - name: timezone
+        in: query
+        description: IANA timezone to emulate, such as America/New_York.
+        schema:
+          type: string
+      - name: locale
+        in: query
+        description: BCP 47 locale to emulate, such as en-US.
+        schema:
+          type: string
+      - name: cacheTtl
+        in: query
+        description: Response cache TTL in seconds. Maximum 604800.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 604800
+      - name: preloadFonts
+        in: query
+        description: Preload discovered Google Fonts before capture.
+        schema:
+          type: boolean
+          default: false
+      - name: removeElements
+        in: query
+        description: Comma-separated CSS selectors to remove before capture.
+        schema:
+          type: string
+        example: .popup,#newsletter
+      - name: removePopups
+        in: query
+        description: Remove common popups, modals, and overlays.
+        schema:
+          type: boolean
+          default: false
+      - name: mockupDevice
+        in: query
+        description: Wrap the screenshot in a device frame.
+        schema:
+          type: string
+          enum:
+          - browser
+          - iphone
+          - macbook
+      - name: geoLatitude
+        in: query
+        description: Latitude for browser geolocation override.
+        schema:
+          type: number
+          minimum: -90
+          maximum: 90
+      - name: geoLongitude
+        in: query
+        description: Longitude for browser geolocation override.
+        schema:
+          type: number
+          minimum: -180
+          maximum: 180
+      - name: geoAccuracy
+        in: query
+        description: Geolocation accuracy in meters.
+        schema:
+          type: number
+          minimum: 0
+          maximum: 100000
+          default: 100
+      responses:
+        '200':
+          description: Binary image or PDF response.
+          headers:
+            x-credits-remaining:
+              description: Remaining monthly quota plus credit balance.
+              schema:
+                type: string
+            x-screenshot-id:
+              description: Unique identifier for this screenshot request.
+              schema:
+                type: string
+            x-duration-ms:
+              description: Capture duration in milliseconds.
+              schema:
+                type: string
+            x-cache:
+              description: Whether the response was served from cache.
+              schema:
+                type: string
+                enum:
+                - HIT
+                - MISS
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Screenshots
+      operationId: captureHtmlScreenshot
+      summary: Capture HTML or URL screenshot
+      description: Capture raw HTML or a URL as PNG, JPEG, WebP, or PDF. Use POST when sending HTML, CSS, JavaScript, or larger structured options.
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenshotRequest'
+            examples:
+              htmlToPng:
+                summary: HTML to PNG
+                value:
+                  html: <main><h1>Hello from ScreenshotAPI</h1></main>
+                  type: png
+                  width: 1200
+                  height: 630
+              urlToPdf:
+                summary: URL to PDF
+                value:
+                  url: https://example.com
+                  type: pdf
+                  fullPage: true
+      responses:
+        '200':
+          description: Binary image or PDF response.
+          headers:
+            x-credits-remaining:
+              description: Remaining monthly quota plus credit balance.
+              schema:
+                type: string
+            x-screenshot-id:
+              description: Unique identifier for this screenshot request.
+              schema:
+                type: string
+            x-duration-ms:
+              description: Capture duration in milliseconds.
+              schema:
+                type: string
+            x-cache:
+              description: Whether the response was served from cache.
+              schema:
+                type: string
+                enum:
+                - HIT
+                - MISS
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: JSON error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/health:
+    get:
+      tags:
+      - Screenshots
+      operationId: getHealth
+      summary: Check API health
+      description: Returns API health status and server timestamp.
+      responses:
+        '200':
+          description: API health response.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - timestamp
+                properties:
+                  status:
+                    type: string
+                    const: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+components:
+  schemas:
+    ScreenshotRequest:
+      type: object
+      anyOf:
+      - required:
+        - url
+      - required:
+        - html
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Absolute http or https URL to capture.
+        html:
+          type: string
+          description: Raw HTML to render before capture.
+        width:
+          type: integer
+          minimum: 1
+          maximum: 1920
+          default: 1440
+        height:
+          type: integer
+          minimum: 1
+          maximum: 10000
+          default: 900
+        fullPage:
+          type: boolean
+          default: false
+        type:
+          type: string
+          enum:
+          - png
+          - jpeg
+          - webp
+          - pdf
+          default: png
+        quality:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        colorScheme:
+          type: string
+          enum:
+          - light
+          - dark
+        waitUntil:
+          type: string
+          enum:
+          - load
+          - domcontentloaded
+          - networkidle0
+          - networkidle2
+          default: networkidle2
+        waitForSelector:
+          type: string
+          maxLength: 500
+        delay:
+          type: integer
+          minimum: 0
+          maximum: 30000
+          default: 0
+        blockAds:
+          type: boolean
+          default: false
+        removeCookieBanners:
+          type: boolean
+          default: false
+        cssInject:
+          type: string
+          maxLength: 10000
+        jsInject:
+          type: string
+          maxLength: 10000
+        stealthMode:
+          type: boolean
+          default: false
+        devicePixelRatio:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          default: 1
+        timezone:
+          type: string
+        locale:
+          type: string
+        cacheTtl:
+          type: integer
+          minimum: 1
+          maximum: 604800
+        preloadFonts:
+          type: boolean
+          default: false
+        removeElements:
+          type: array
+          maxItems: 25
+          items:
+            type: string
+            maxLength: 500
+        removePopups:
+          type: boolean
+          default: false
+        mockupDevice:
+          type: string
+          enum:
+          - browser
+          - iphone
+          - macbook
+        geoLocation:
+          type: object
+          required:
+          - latitude
+          - longitude
+          properties:
+            latitude:
+              type: number
+              minimum: -90
+              maximum: 90
+            longitude:
+              type: number
+              minimum: -180
+              maximum: 180
+            accuracy:
+              type: number
+              minimum: 0
+              maximum: 100000
+              default: 100
+    ErrorResponse:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        fix:
+          type: string
+        remainingInPlan:
+          type: integer
+        creditBalance:
+          type: integer
+        quotaResetsAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the plan’s included allowance resets. Present on 402 responses; null when the account holds no entitled plan.
+      additionalProperties: true
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: ScreenshotAPI API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Alternative API key transport using Authorization: Bearer.'
+externalDocs:
+  description: ScreenshotAPI documentation
+  url: https://screenshotapi.to/docs

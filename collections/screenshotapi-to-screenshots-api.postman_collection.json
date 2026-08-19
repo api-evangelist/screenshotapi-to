@@ -1,0 +1,2052 @@
+{
+  "item": [
+    {
+      "id": "4143a033-ff35-4848-974b-79930faafc9e",
+      "name": "Screenshots",
+      "description": {
+        "content": "Capture URLs or HTML as images or PDFs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c53bca68-b039-45ac-be02-8908365406c8",
+          "name": "Capture a URL screenshot or PDF",
+          "request": {
+            "name": "Capture a URL screenshot or PDF",
+            "description": {
+              "content": "Capture a public or authorized URL as PNG, JPEG, WebP, or PDF. This endpoint returns binary image/PDF data directly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "screenshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) Absolute http or https URL to capture. Public or authorized URLs only."
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "1440",
+                  "description": "Viewport width in pixels. Maximum 1920."
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "900",
+                  "description": "Viewport height in pixels. Maximum 10000."
+                },
+                {
+                  "disabled": false,
+                  "key": "fullPage",
+                  "value": "false",
+                  "description": "Capture the full scrollable page."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "png",
+                  "description": "Output format."
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "100",
+                  "description": "JPEG/WebP quality from 1 to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "colorScheme",
+                  "value": "<string>",
+                  "description": "Force light or dark color-scheme rendering."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitUntil",
+                  "value": "networkidle2",
+                  "description": "Navigation lifecycle event to wait for before capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "waitForSelector",
+                  "value": "<string>",
+                  "description": "CSS selector to wait for before capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "delay",
+                  "value": "0",
+                  "description": "Additional delay in milliseconds after the page loads."
+                },
+                {
+                  "disabled": false,
+                  "key": "blockAds",
+                  "value": "false",
+                  "description": "Block common ad and tracker requests during capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "removeCookieBanners",
+                  "value": "false",
+                  "description": "Hide and accept common cookie banners before capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "cssInject",
+                  "value": "<string>",
+                  "description": "CSS to inject before capture. Maximum 10000 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "jsInject",
+                  "value": "<string>",
+                  "description": "JavaScript to evaluate before capture. Maximum 10000 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "stealthMode",
+                  "value": "false",
+                  "description": "Use stealth rendering for authorized targets."
+                },
+                {
+                  "disabled": false,
+                  "key": "devicePixelRatio",
+                  "value": "1",
+                  "description": "Retina/HiDPI capture scale."
+                },
+                {
+                  "disabled": false,
+                  "key": "timezone",
+                  "value": "<string>",
+                  "description": "IANA timezone to emulate, such as America/New_York."
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "BCP 47 locale to emulate, such as en-US."
+                },
+                {
+                  "disabled": false,
+                  "key": "cacheTtl",
+                  "value": "<integer>",
+                  "description": "Response cache TTL in seconds. Maximum 604800."
+                },
+                {
+                  "disabled": false,
+                  "key": "preloadFonts",
+                  "value": "false",
+                  "description": "Preload discovered Google Fonts before capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "removeElements",
+                  "value": "<string>",
+                  "description": "Comma-separated CSS selectors to remove before capture."
+                },
+                {
+                  "disabled": false,
+                  "key": "removePopups",
+                  "value": "false",
+                  "description": "Remove common popups, modals, and overlays."
+                },
+                {
+                  "disabled": false,
+                  "key": "mockupDevice",
+                  "value": "<string>",
+                  "description": "Wrap the screenshot in a device frame."
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLatitude",
+                  "value": "<number>",
+                  "description": "Latitude for browser geolocation override."
+                },
+                {
+                  "disabled": false,
+                  "key": "geoLongitude",
+                  "value": "<number>",
+                  "description": "Longitude for browser geolocation override."
+                },
+                {
+                  "disabled": false,
+                  "key": "geoAccuracy",
+                  "value": "100",
+                  "description": "Geolocation accuracy in meters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fbb9ef3e-447d-4b4d-92c6-74a907357590",
+              "name": "Binary image or PDF response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Remaining monthly quota plus credit balance.",
+                  "key": "x-credits-remaining",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this screenshot request.",
+                  "key": "x-screenshot-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Capture duration in milliseconds.",
+                  "key": "x-duration-ms",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Whether the response was served from cache.",
+                  "key": "x-cache",
+                  "value": "HIT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e429adde-89d0-44f1-ae5f-a808f77d0ba5",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5929007f-c497-4898-9e95-77667fdeccf7",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d07c8d45-4111-410a-8eca-68bd531813ba",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abf33ea4-49a1-4cf1-993c-d9ad5e101549",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0314ef8e-9915-422a-98d2-bfed7dfedb88",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "276a05f1-1c7c-4a5d-9a77-9095e706fb42",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fe9d6fd-ba76-4b00-a240-7cacb0a311e1",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "https://example.com"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1440"
+                    },
+                    {
+                      "key": "height",
+                      "value": "900"
+                    },
+                    {
+                      "key": "fullPage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "type",
+                      "value": "png"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "100"
+                    },
+                    {
+                      "key": "colorScheme",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "waitUntil",
+                      "value": "networkidle2"
+                    },
+                    {
+                      "key": "waitForSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "0"
+                    },
+                    {
+                      "key": "blockAds",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeCookieBanners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "cssInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jsInject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stealthMode",
+                      "value": "false"
+                    },
+                    {
+                      "key": "devicePixelRatio",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cacheTtl",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "preloadFonts",
+                      "value": "false"
+                    },
+                    {
+                      "key": "removeElements",
+                      "value": ".popup,#newsletter"
+                    },
+                    {
+                      "key": "removePopups",
+                      "value": "false"
+                    },
+                    {
+                      "key": "mockupDevice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geoLatitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoLongitude",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoAccuracy",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d2409bc-1ca3-452d-8a1b-fd440b453fb5",
+          "name": "Capture HTML or URL screenshot",
+          "request": {
+            "name": "Capture HTML or URL screenshot",
+            "description": {
+              "content": "Capture raw HTML or a URL as PNG, JPEG, WebP, or PDF. Use POST when sending HTML, CSS, JavaScript, or larger structured options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "screenshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa879a32-87eb-4fdb-8d1a-8b450c40dc7f",
+              "name": "Binary image or PDF response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Remaining monthly quota plus credit balance.",
+                  "key": "x-credits-remaining",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this screenshot request.",
+                  "key": "x-screenshot-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Capture duration in milliseconds.",
+                  "key": "x-duration-ms",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Whether the response was served from cache.",
+                  "key": "x-cache",
+                  "value": "HIT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93d9a389-1779-4e4b-898c-40b5858c3683",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37832c0f-e721-4b34-b85a-f27090df39fa",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "396293b4-663c-4ab3-8338-0e15051d3f00",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "067fb2d1-e7ff-4ff3-8162-3d2ad5ae433a",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6218205-4340-455a-b3e9-89902cc14c14",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08990c54-185c-4d15-bf96-bf1cb6e4404c",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c49b672-2aa4-4bd1-aee4-6197df44c62d",
+              "name": "JSON error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "screenshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"html\": \"<main><h1>Hello from ScreenshotAPI</h1></main>\",\n  \"type\": \"png\",\n  \"width\": 1200,\n  \"height\": 630\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"fix\": \"string\",\n  \"remainingInPlan\": 2014,\n  \"creditBalance\": 9255,\n  \"quotaResetsAt\": \"1983-01-30T00:28:55.208Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40e0bcd1-9f22-4371-9d2b-8b6979554d78",
+          "name": "Check API health",
+          "request": {
+            "name": "Check API health",
+            "description": {
+              "content": "Returns API health status and server timestamp.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fc1d54a-acd8-421a-8521-13a143755a3c",
+              "name": "API health response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"timestamp\": \"1984-04-09T12:05:35.187Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://screenshotapi.to",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "88a511f0-13ca-4eab-b2eb-7577b67517cd",
+    "name": "Screenshot Screenshots API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ScreenshotAPI captures public or authorized web pages as PNG, JPEG, WebP, or PDF. Use it when an application or AI agent needs hosted screenshot infrastructure without running browsers.\n\nContact Support:\n Name: ScreenshotAPI Support\n Email: support@screenshotapi.to",
+      "type": "text/plain"
+    }
+  }
+}
