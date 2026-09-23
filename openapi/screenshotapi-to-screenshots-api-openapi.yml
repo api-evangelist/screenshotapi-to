@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Screenshot Screenshots API
+  title: Screenshots API
   version: 1.0.0
   summary: Website screenshots, HTML screenshots, and PDFs via API.
   description: ScreenshotAPI captures public or authorized web pages as PNG, JPEG, WebP, or PDF. Use it when an application or AI agent needs hosted screenshot infrastructure without running browsers.
