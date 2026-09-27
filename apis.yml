@@ -39,7 +39,6 @@ apis:
   name: ScreenshotAPI Screenshots API
   description: Capture URLs or HTML as images or PDFs.
   humanURL: https://screenshotapi.to/docs
-  baseURL: https://screenshotapi.to
   tags:
   - Screenshots
   properties:
