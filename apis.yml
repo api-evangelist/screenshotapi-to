@@ -22,7 +22,7 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 created: '2026-08-02'
-modified: '2026-09-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 tags:
 - Screenshots
@@ -94,5 +94,7 @@ x-evidence:
     found missing. Operation, path and schema counts were measured from the fetched spec. Rate limits
     are not asserted — none were found published.
 common:
+- url: https://screenshotapi.to/blog
+  type: Blog
 - type: Website
   url: https://screenshotapi.to
